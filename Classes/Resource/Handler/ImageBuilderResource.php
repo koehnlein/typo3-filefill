@@ -61,7 +61,7 @@ class ImageBuilderResource implements RemoteResourceInterface
      * @param FileInterface $fileObject
      * @return bool
      */
-    public function hasFile($fileIdentifier, $filePath, FileInterface $fileObject = null)
+    public function hasFile($fileIdentifier, $filePath, ?FileInterface $fileObject = null)
     {
         return $GLOBALS['TYPO3_CONF_VARS']['GFX']['gdlib']
             && $fileObject instanceof FileInterface
@@ -74,7 +74,7 @@ class ImageBuilderResource implements RemoteResourceInterface
      * @param FileInterface $fileObject
      * @return string
      */
-    public function getFile($fileIdentifier, $filePath, FileInterface $fileObject = null)
+    public function getFile($fileIdentifier, $filePath, ?FileInterface $fileObject = null)
     {
         $content = '';
 
@@ -102,7 +102,7 @@ class ImageBuilderResource implements RemoteResourceInterface
         ];
         $gifBuilder = GeneralUtility::makeInstance(GifBuilder::class);
         $gifBuilder->start($fileArray, []);
-        $theImage = $gifBuilder->gifBuild();
+        $theImage = $gifBuilder->gifBuild()->getFullPath();
         if (file_exists($theImage)) {
             $content = file_get_contents($theImage);
             unlink($theImage);
