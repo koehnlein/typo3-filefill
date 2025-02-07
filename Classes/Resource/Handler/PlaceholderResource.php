@@ -39,7 +39,7 @@ class PlaceholderResource implements RemoteResourceInterface
      */
     protected $url = 'https://via.placeholder.com/';
 
-    public function __construct($_, RequestFactory $requestFactory = null)
+    public function __construct($_, ?RequestFactory $requestFactory = null)
     {
         $this->requestFactory = $requestFactory ?: GeneralUtility::makeInstance(RequestFactory::class);
     }
@@ -50,7 +50,7 @@ class PlaceholderResource implements RemoteResourceInterface
      * @param FileInterface $fileObject
      * @return bool
      */
-    public function hasFile($fileIdentifier, $filePath, FileInterface $fileObject = null)
+    public function hasFile($fileIdentifier, $filePath, ?FileInterface $fileObject = null)
     {
         return $fileObject instanceof FileInterface
             && in_array($fileObject->getExtension(), $this->allowedFileExtensions, true);
@@ -62,7 +62,7 @@ class PlaceholderResource implements RemoteResourceInterface
      * @param FileInterface $fileObject
      * @return string
      */
-    public function getFile($fileIdentifier, $filePath, FileInterface $fileObject = null)
+    public function getFile($fileIdentifier, $filePath, ?FileInterface $fileObject = null)
     {
         try {
             $fileExtension = $fileObject->getExtension();
